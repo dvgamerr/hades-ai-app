@@ -16,7 +16,7 @@ jobs:
 
       - name: Cache Bun
         id: cache-bun
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: |
             ~/.bun/install/cache
