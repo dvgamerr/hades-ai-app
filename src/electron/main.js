@@ -107,7 +107,7 @@ async function createWindow() {
     y: lasted.y,
     ...(process.platform === 'darwin' ? {} : { icon: windowIcon }),
     webPreferences: {
-      preload: url.fileURLToPath(new URL('preload.mjs', import.meta.url)),
+      preload: url.fileURLToPath(new URL('preload.js', import.meta.url)),
       sandbox: true,
       nodeIntegration: false,
       contextIsolation: true,

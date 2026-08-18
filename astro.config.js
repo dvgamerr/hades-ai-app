@@ -7,7 +7,14 @@ import electron from 'astro-electron'
 
 setMaxListeners(20)
 
+const electronOptions = {
+  main: { entry: 'src/electron/main.js', vite: {} },
+  preload: { input: 'src/electron/preload.js' },
+}
+const isBuild = process.argv.includes('build')
+
 export default defineConfig({
+  base: isBuild ? './' : undefined,
   build: {
     assets: 'dist',
   },
@@ -31,11 +38,5 @@ export default defineConfig({
   security: {
     checkOrigin: false,
   },
-  integrations: [
-    svelte(),
-    electron({
-      main: { entry: 'src/electron/main.js', vite: {} },
-      preload: { input: 'src/electron/preload.js' },
-    }),
-  ],
+  integrations: [svelte(), ...(isBuild ? [] : [electron(electronOptions)])],
 })
